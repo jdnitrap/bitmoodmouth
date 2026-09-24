@@ -2,3 +2,6 @@ build/
 cmix-bit
 bitmoodmouth
 *.tmp
+__pycache__/
+*.pyc
+*.pkl

@@ -2,15 +2,19 @@
 
 Generator (mouth) extracted from [jdnitrap/bitmood](https://github.com/jdnitrap/bitmood).
 
-This repo is a copy of the **bit/byte generation** path only: `generate`, `write`, plus `train` / `info` / `graph` so a memory can be built and used. Compression (`compress` / `decompress`), `demo`, and `compare` stay in bitmood.
+Python is the working tree. The C++ copy under `src/` is incomplete and not required to run.
 
-The predictor engine under `src/model` is included because generation samples from those bit predictions. It is not a rewrite.
+## Python
+
+No third-party packages. Python 3.8+.
 
 ```
-make
-./bitmoodmouth train --state brain.bin notes.txt
-./bitmoodmouth generate 300 "The " --state brain.bin --temp 0.8 --seed 42
-./bitmoodmouth write --state brain.bin --out draft.txt
+python3 python/bitmoodmouth.py train --state brain.pkl notes.txt
+python3 python/bitmoodmouth.py info brain.pkl
+python3 python/bitmoodmouth.py generate 300 "The " --state brain.pkl --temp 0.8 --seed 42
+python3 python/bitmoodmouth.py write --state brain.pkl --out draft.txt
 ```
 
-Source snapshot taken from `jdnitrap/bitmood` at commit `4818218972b391860d6a77f9ea626d0a428763d3`.
+`generate` never learns from its own output. `--state` memories are pickle files and are **not** compatible with C++ `brain.bin`.
+
+Specialists: order 0–4 plus a letter/digit/space/punct class vote, mixed in stretch space. No LSTM, graph, SNN, image, or audio in this port.
