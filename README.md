@@ -17,4 +17,6 @@ python3 python/bitmoodmouth.py write --state brain.pkl --out draft.txt
 
 `generate` never learns from its own output. `--state` memories are pickle files and are **not** compatible with C++ `brain.bin`.
 
-Specialists: order 0–4 plus a letter/digit/space/punct class vote, mixed in stretch space. No LSTM, graph, SNN, image, or audio in this port.
+Specialists: order 0-4, class vote C, and grid specialist E (ImHex idea): line rows plus two auto widths scored on distances 2..1024. Each view votes with the byte above and with (above, left, column). `train --no-grid` turns E off. `info` prints the current widths and how often each view's "above" matched.
+
+No LSTM, graph, SNN, image, or audio in this port.
